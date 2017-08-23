@@ -174,6 +174,12 @@ led_control_binary_probe(led_control_t *self)
         .val = "/sys/class/leds/button-backlight/brightness",
       },
     },
+    // Motorola Moto E LTE (2nd gen)
+    {
+      {
+        .val = "/sys/class/leds/rgb/brightness",
+      },
+    },
   };
 
   static led_channel_binary_t channel[1];
