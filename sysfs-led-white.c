@@ -169,6 +169,13 @@ led_control_white_probe(led_control_t *self)
         .val = "/sys/class/leds/white/brightness",
       },
     },
+    // "Motorola Moto E LTE(2nd gen)"
+    {
+      {
+        .max = "/sys/class/leds/rgb/max_brightness",
+        .val = "/sys/class/leds/rgb/brightness",
+      },
+    },
   };
 
   static led_channel_white_t channel[1];
