@@ -1,9 +1,9 @@
 Name:       mce-plugin-libhybris
 Summary:    Libhybris plugin for Mode Control Entity
-Version:    1.12.3
+Version:    1.14.3
 Release:    1
 Group:      System/System Control
-License:    LGPLv2.1
+License:    LGPLv2
 URL:        https://github.com/nemomobile/mce-plugin-libhybris
 Source0:    %{name}-%{version}.tar.bz2
 
@@ -32,7 +32,7 @@ make %{?_smp_mflags}
 
 %install
 rm -rf %{buildroot}
-make install DESTDIR=%{buildroot}
+make install DESTDIR=%{buildroot} _LIBDIR=%{_libdir}
 # rpm automajick needs +x bits on all elf files after install
 chmod 755 %{buildroot}%{_libdir}/mce/modules/hybris.so
 
@@ -60,6 +60,6 @@ fi
 
 %files
 %defattr(-,root,root,-)
-%doc COPYING
+%license COPYING
 # do not include the bogus +x bit for packaged DSOs
 %attr(644,-,-) %{_libdir}/mce/modules/hybris.so
