@@ -9,6 +9,16 @@ DESTDIR ?= /tmp/test-install-$(NAME)
 _LIBDIR ?= /usr/lib
 
 # ----------------------------------------------------------------------------
+# CONFIG
+# ----------------------------------------------------------------------------
+
+ENABLE_HYBRIS_SUPPPORT ?= 0
+
+ifeq ($(ENABLE_HYBRIS_SUPPORT),1)
+CPPFLAGS += -DENABLE_HYBRIS_SUPPORT
+endif
+
+# ----------------------------------------------------------------------------
 # List of targets to build
 # ----------------------------------------------------------------------------
 
@@ -64,8 +74,10 @@ LDLIBS   += -lpthread
 # ----------------------------------------------------------------------------
 
 PKG_NAMES += glib-2.0
+ifeq ($(ENABLE_HYBRIS_SUPPORT),1)
 PKG_NAMES += libhardware
 PKG_NAMES += android-headers
+endif
 
 maintenance  = normalize clean distclean mostlyclean
 intersection = $(strip $(foreach w,$1, $(filter $w,$2)))
@@ -114,10 +126,12 @@ locals: $(patsubst %.c,%.i,$(wildcard *.c))
 # Explicit dependencies
 # ----------------------------------------------------------------------------
 
+ifeq ($(ENABLE_HYBRIS_SUPPORT),1)
 hybris_OBJS += hybris-fb.pic.o
 hybris_OBJS += hybris-lights.pic.o
 hybris_OBJS += hybris-sensors.pic.o
 hybris_OBJS += hybris-thread.pic.o
+endif
 hybris_OBJS += plugin-api.pic.o
 hybris_OBJS += plugin-config.pic.o
 hybris_OBJS += plugin-logging.pic.o
@@ -128,6 +142,7 @@ hybris_OBJS += sysfs-led-f5121.pic.o
 hybris_OBJS += sysfs-led-hammerhead.pic.o
 hybris_OBJS += sysfs-led-htcvision.pic.o
 hybris_OBJS += sysfs-led-main.pic.o
+hybris_OBJS += sysfs-led-mind2-v1.pic.o
 hybris_OBJS += sysfs-led-redgreen.pic.o
 hybris_OBJS += sysfs-led-util.pic.o
 hybris_OBJS += sysfs-led-vanilla.pic.o
@@ -135,12 +150,15 @@ hybris_OBJS += sysfs-led-white.pic.o
 hybris_OBJS += sysfs-led-vince.pic.o
 hybris_OBJS += sysfs-val.pic.o
 
-hybris.so : LDLIBS += -lhardware -lm
+ifeq ($(ENABLE_HYBRIS_SUPPORT),1)
+hybris.so : LDLIBS += -lhardware
+endif
+hybris.so : LDLIBS += -lm
 hybris.so : $(hybris_OBJS)
 
 install:: hybris.so
 	install -d -m755 $(DESTDIR)$(_LIBDIR)/mce/modules
-	install -m644 hybris.so $(DESTDIR)$(_LIBDIR)/mce/modules/
+	install -m755 hybris.so $(DESTDIR)$(_LIBDIR)/mce/modules/
 
 # ----------------------------------------------------------------------------
 # Source code normalization

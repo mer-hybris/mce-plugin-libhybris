@@ -212,6 +212,7 @@ sysfs-led-main.o:\
 	sysfs-led-htcvision.h\
 	sysfs-led-vince.h\
 	sysfs-led-main.h\
+	sysfs-led-mind2-v1.h\
 	sysfs-led-redgreen.h\
 	sysfs-led-util.h\
 	sysfs-led-vanilla.h\
@@ -229,10 +230,29 @@ sysfs-led-main.pic.o:\
 	sysfs-led-htcvision.h\
 	sysfs-led-vince.h\
 	sysfs-led-main.h\
+	sysfs-led-mind2-v1.h\
 	sysfs-led-redgreen.h\
 	sysfs-led-util.h\
 	sysfs-led-vanilla.h\
 	sysfs-led-white.h\
+
+sysfs-led-mind2-v1.o:\
+	sysfs-led-mind2-v1.c\
+	plugin-config.h\
+	plugin-logging.h\
+	sysfs-led-main.h\
+	sysfs-led-mind2-v1.h\
+	sysfs-led-util.h\
+	sysfs-val.h\
+
+sysfs-led-mind2-v1.pic.o:\
+	sysfs-led-mind2-v1.c\
+	plugin-config.h\
+	plugin-logging.h\
+	sysfs-led-main.h\
+	sysfs-led-mind2-v1.h\
+	sysfs-led-util.h\
+	sysfs-val.h\
 
 sysfs-led-redgreen.o:\
 	sysfs-led-redgreen.c\
