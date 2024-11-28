@@ -147,6 +147,7 @@ hybris_OBJS += sysfs-led-redgreen.pic.o
 hybris_OBJS += sysfs-led-util.pic.o
 hybris_OBJS += sysfs-led-vanilla.pic.o
 hybris_OBJS += sysfs-led-white.pic.o
+hybris_OBJS += sysfs-led-vince.pic.o
 hybris_OBJS += sysfs-val.pic.o
 
 ifeq ($(ENABLE_HYBRIS_SUPPORT),1)

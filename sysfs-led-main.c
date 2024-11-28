@@ -33,6 +33,7 @@
 #include "sysfs-led-binary.h"
 #include "sysfs-led-redgreen.h"
 #include "sysfs-led-white.h"
+#include "sysfs-led-vince.h"
 #include "sysfs-led-mind2-v1.h"
 
 #include "plugin-logging.h"
@@ -305,6 +306,9 @@ led_control_probe(led_control_t *self)
      * that has 'brightness' control file. */
     { "binary", led_control_binary_probe },
 
+    /* The vince requires  'brightness', 'max_brightness' and 'blink'
+     * control files to be present for red, green and blue channels. */
+    { "vince", led_control_vince_probe },
     /* Arrangement of two rgb leds
      *    with 0/1 red, green, blue color selection
      *    and 0-N brightness control
