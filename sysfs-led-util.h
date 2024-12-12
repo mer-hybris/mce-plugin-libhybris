@@ -49,6 +49,12 @@ static inline int led_util_max(int a, int b)
     return a > b ? a : b;
 }
 
+/** Minimum of two integer values */
+static inline int led_util_min(int a, int b)
+{
+    return a < b ? a : b;
+}
+
 /** Maximum of three integer values */
 static inline int led_util_max3(int a, int b, int c)
 {

@@ -34,6 +34,7 @@
 #include "sysfs-led-redgreen.h"
 #include "sysfs-led-white.h"
 #include "sysfs-led-mind2-v1.h"
+#include "sysfs-led-mind2-v2.h"
 
 #include "plugin-logging.h"
 #include "plugin-config.h"
@@ -310,6 +311,11 @@ led_control_probe(led_control_t *self)
      *    and 0-N brightness control
      * plus master power toggle governing both leds. */
     { "mind2v1", led_control_mind2v1_probe },
+
+    /* Arrangement of two rgb leds
+     *    with 0-N red, green, blue color selection
+     * plus master power toggle governing both leds. */
+    { "mind2v2", led_control_mind2v2_probe },
   };
 
   bool   ack  = false;
@@ -333,6 +339,8 @@ led_control_probe(led_control_t *self)
     {
       continue;
     }
+
+    mce_log(LL_DEBUG, "probing sysfs led backend: %s", lut[i].name);
 
     if( !lut[i].func(self) )
     {
